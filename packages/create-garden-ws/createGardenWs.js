@@ -30,9 +30,10 @@
 'use strict';
 
 const commander = require('commander');
-const chalk = require('chalk');
 
 const packageJson = require('./package.json');
+
+const chalk = require('chalk');
 
 let projectName;
 
