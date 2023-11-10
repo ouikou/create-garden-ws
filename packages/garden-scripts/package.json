@@ -4,7 +4,7 @@
   "description": "> TODO: description",
   "author": "wang.weiguang <wang.weiguang@zipc.com>",
   "homepage": "",
-  "license": "ISC",
+  "license": "MIT",
   "main": "bin/garden-scripts.js",
   "directories": {
     "bin": "bin",
@@ -18,5 +18,6 @@
   },
   "scripts": {
     "test": "node ./__tests__/garden-scripts.test.js"
-  }
+  },
+  "gitHead": "cca0606ea17e269429223507ef2a7d71ccf466d0"
 }
