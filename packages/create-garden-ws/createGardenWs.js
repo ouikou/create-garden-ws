@@ -115,6 +115,8 @@ function init() {
             `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`
         );
         process.exit(1);
+    } else {
+        console.log(`####################  ${projectName}`)
     }
 }
 function getTemplateInstallPackage() {
