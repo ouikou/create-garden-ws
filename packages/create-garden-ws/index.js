@@ -51,6 +51,6 @@ if (major < 14) {
     process.exit(1);
 }
 
-import { init } from './createGardenWs';
+const { init } = require('./createGardenWs');
 
 init();
