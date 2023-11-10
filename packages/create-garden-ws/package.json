@@ -5,6 +5,9 @@
   "author": "wang.weiguang <wang.weiguang@zipc.com>",
   "homepage": "",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "main": "bin/create-garden-ws.js",
   "directories": {
     "bin": "bin",
@@ -27,5 +30,5 @@
     "chalk": "^5.3.0",
     "commander": "^11.1.0"
   },
-  "gitHead": "8757c5aa0bce4a91e51a6abaf613f1e857058ff0"
+  "gitHead": "0c1302a74164b3cba4a19085c9233ace902a2e61"
 }
