@@ -13,6 +13,9 @@
   "files": [
     "lib"
   ],
+  "bin": {
+    "create-garden-ws": "./index.js"
+  },
   "scripts": {
     "test": "node ./__tests__/create-garden-ws.test.js"
   },
