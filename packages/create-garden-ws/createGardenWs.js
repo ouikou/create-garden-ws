@@ -29,18 +29,18 @@
 
 'use strict';
 
-const commander = require('commander');
-const chalk = require('chalk');
+import { Command } from 'commander';
+import { green, cyan, bold } from 'chalk';
 
-const packageJson = require('./package.json');
+import { name as _name, version } from './package.json';
 
 let projectName;
 
 function init() {
-    const program = new commander.Command(packageJson.name)
-        .version(packageJson.version)
+    const program = new Command(_name)
+        .version(version)
         .arguments('<project-directory>')
-        .usage(`${chalk.green('<project-directory>')} [options]`)
+        .usage(`${green('<project-directory>')} [options]`)
         .action(name => {
             projectName = name;
         })
@@ -53,17 +53,17 @@ function init() {
         .allowUnknownOption()
         .on('--help', () => {
             console.log(
-                `    Only ${chalk.green('<project-directory>')} is required.`
+                `    Only ${green('<project-directory>')} is required.`
             );
             console.log();
-            console.log(`    A custom ${chalk.cyan('--template')} can be one of:`);
+            console.log(`    A custom ${cyan('--template')} can be one of:`);
             console.log(
-                `      - a custom template published on npm: ${chalk.green(
+                `      - a custom template published on npm: ${green(
                     'cgw-template'
                 )}`
             );
             console.log(
-                `      - a local path relative to the current working directory: ${chalk.green(
+                `      - a local path relative to the current working directory: ${green(
                     'file:../my-custom-template'
                 )}`
             );
@@ -72,9 +72,9 @@ function init() {
         .parse(process.argv);
 
     if (program.info) {
-        console.log(chalk.bold('\nEnvironment Info:'));
+        console.log(bold('\nEnvironment Info:'));
         console.log(
-            `\n  current version of ${packageJson.name}: ${packageJson.version}`
+            `\n  current version of ${_name}: ${version}`
         );
         console.log(`  running from ${__dirname}`);
         return envinfo
@@ -103,16 +103,16 @@ function init() {
     if (typeof projectName === 'undefined') {
         console.error('Please specify the project directory:');
         console.log(
-            `  ${chalk.cyan(program.name())} ${chalk.green('<project-directory>')}`
+            `  ${cyan(program.name())} ${green('<project-directory>')}`
         );
         console.log();
         console.log('For example:');
         console.log(
-            `  ${chalk.cyan(program.name())} ${chalk.green('my-garden-ws')}`
+            `  ${cyan(program.name())} ${green('my-garden-ws')}`
         );
         console.log();
         console.log(
-            `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`
+            `Run ${cyan(`${program.name()} --help`)} to see all options.`
         );
         process.exit(1);
     } else {
@@ -123,7 +123,7 @@ function getTemplateInstallPackage() {
     console.log('############  getTemplateInstallPackage()')
 }
 
-module.exports = {
+export default {
     init,
     getTemplateInstallPackage,
 };
