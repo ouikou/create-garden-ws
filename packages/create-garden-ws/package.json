@@ -11,7 +11,8 @@
     "test": "__tests__"
   },
   "files": [
-    "bin"
+    "index.js",
+    "createGardenWs.js"
   ],
   "bin": {
     "create-garden-ws": "./index.js"
@@ -25,5 +26,5 @@
   "dependencies": {
     "commander": "^11.1.0"
   },
-  "gitHead": "6e3989b74211ed9741642b3d6fa47dd53ef5f9ab"
+  "gitHead": "b9c7e445c5df0c052593544779ae0ac25b54bf18"
 }
