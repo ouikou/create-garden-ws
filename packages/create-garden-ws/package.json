@@ -24,7 +24,8 @@
     "jest": "^29.7.0"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
     "commander": "^11.1.0"
   },
-  "gitHead": "b9c7e445c5df0c052593544779ae0ac25b54bf18"
+  "gitHead": "8757c5aa0bce4a91e51a6abaf613f1e857058ff0"
 }
