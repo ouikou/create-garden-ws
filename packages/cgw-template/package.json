@@ -1,0 +1,22 @@
+{
+  "name": "cgw-template",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "wang.weiguang <wang.weiguang@zipc.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "bin/cgw-template.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/cgw-template.test.js"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
