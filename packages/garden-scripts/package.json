@@ -19,5 +19,5 @@
   "scripts": {
     "test": "node ./__tests__/garden-scripts.test.js"
   },
-  "gitHead": "7a9e91964a1ef1329cc9722a8dfcda7a5b32db9f"
+  "gitHead": "6e3989b74211ed9741642b3d6fa47dd53ef5f9ab"
 }
