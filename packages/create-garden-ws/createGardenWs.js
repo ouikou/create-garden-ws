@@ -81,7 +81,7 @@ function init() {
             .run(
                 {
                     System: ['OS', 'CPU'],
-                    Binaries: ['Node', 'npm', 'Yarn'],
+                    Binaries: ['Node', 'npm'],
                     Browsers: [
                         'Chrome',
                         'Edge',
@@ -89,8 +89,7 @@ function init() {
                         'Firefox',
                         'Safari',
                     ],
-                    npmPackages: ['react', 'react-dom', 'react-scripts'],
-                    npmGlobalPackages: ['create-react-app'],
+                    npmGlobalPackages: ['create-garden-ws'],
                 },
                 {
                     duplicates: true,
@@ -115,8 +114,6 @@ function init() {
             `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`
         );
         process.exit(1);
-    } else {
-        console.log(`####################  ${projectName}`)
     }
 }
 function getTemplateInstallPackage() {
