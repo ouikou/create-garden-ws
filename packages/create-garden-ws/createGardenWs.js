@@ -143,6 +143,8 @@ function init() {
             }
         })
         .then(latest => {
+            console.log(`##################################################${packageJson.version}`)
+            console.log(`##################################################${latest}`)
             if (latest && semver.lt(packageJson.version, latest)) {
                 console.log();
                 console.error(
