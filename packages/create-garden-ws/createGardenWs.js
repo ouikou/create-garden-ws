@@ -229,8 +229,36 @@ function run(
             getPackageInfo(templateToInstall),
         ])
             .then(([packageInfo, templateInfo]) => {
-                console.log(`########################################packageInfo:  ${JSON.stringify(packageInfo)}`);
-                console.log(`########################################packageInfo:  ${JSON.stringify(templateInfo)}`);
+                let packageVersion = semver.coerce(packageInfo.version);
+
+                const templatesVersionMinimum = '1.0.0';
+
+                // Assume compatibility if we can't test the version.
+                if (!semver.valid(packageVersion)) {
+                    packageVersion = templatesVersionMinimum;
+                }
+
+                // Only support templates when used alongside new garden-scripts versions.
+                const supportsTemplates = semver.gte(
+                    packageVersion,
+                    templatesVersionMinimum
+                );
+                if (supportsTemplates) {
+                    allDependencies.push(templateToInstall);
+                } else if (template) {
+                    console.log('');
+                    console.log(
+                        `The ${chalk.cyan(packageInfo.name)} version you're using ${packageInfo.name === 'garden-scripts' ? 'is not' : 'may not be'
+                        } compatible with the ${chalk.cyan('--template')} option.`
+                    );
+                    console.log('');
+                }
+
+                console.log(
+                    `Installing ${chalk.cyan(packageInfo.name)}${supportsTemplates ? ` with ${chalk.cyan(templateInfo.name)}` : ''
+                    }...`
+                );
+                console.log();
             })
     });
 }
