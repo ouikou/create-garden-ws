@@ -97,6 +97,8 @@ function init() {
                 }
             )
             .then(console.log);
+    } else {
+        console.log('########################################')
     }
 
     if (typeof projectName === 'undefined') {
