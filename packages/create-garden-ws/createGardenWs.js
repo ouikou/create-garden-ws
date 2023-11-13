@@ -210,6 +210,35 @@ function createApp(name, verbose, version, template) {
     );
 }
 
+function install(dependencies, verbose) {
+    return new Promise((resolve, reject) => {
+        let command = 'npm';
+        let args = [
+            'install',
+            '--no-audit',
+            '--save',
+            '--save-exact',
+            '--loglevel',
+            'error',
+        ].concat(dependencies);
+
+        if (verbose) {
+            args.push('--verbose');
+        }
+
+        const child = spawn(command, args, { stdio: 'inherit' });
+        child.on('close', code => {
+            if (code !== 0) {
+                reject({
+                    command: `${command} ${args.join(' ')}`,
+                });
+                return;
+            }
+            resolve();
+        });
+    });
+}
+
 function run(
     root,
     appName,
@@ -261,6 +290,16 @@ function run(
                     }...`
                 );
                 console.log();
+
+                return install(
+                    allDependencies,
+                    verbose,
+                    true
+                ).then(() => ({
+                    packageInfo,
+                    supportsTemplates,
+                    templateInfo,
+                }));
             })
     });
 }
