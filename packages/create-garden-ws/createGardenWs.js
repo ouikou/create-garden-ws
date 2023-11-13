@@ -189,6 +189,7 @@ function createApp(name, verbose, version, template, useYarn, usePnp) {
     checkAppName(appName);
     fs.ensureDirSync(name);
     if (!isSafeToCreateProjectIn(root, name)) {
+        console.log('############################### isSafeToCreateProjectIn')
         process.exit(1);
     }
     console.log();
@@ -206,7 +207,7 @@ function checkForLatestVersion() {
     return new Promise((resolve, reject) => {
         https
             .get(
-                'https://registry.npmjs.org/-/package/create-react-app/dist-tags',
+                'https://registry.npmjs.org/-/package/create-garden-ws/dist-tags',
                 res => {
                     if (res.statusCode === 200) {
                         let body = '';
@@ -248,7 +249,7 @@ function checkAppName(appName) {
     }
 
     // TODO: there should be a single place that holds the dependencies
-    const dependencies = ['react', 'react-dom', 'react-scripts'].sort();
+    const dependencies = ['create-garden-ws', 'cgw-template', 'garden-scripts'].sort();
     if (dependencies.includes(appName)) {
         console.error(
             chalk.red(
