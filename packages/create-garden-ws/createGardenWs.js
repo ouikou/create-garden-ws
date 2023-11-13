@@ -141,7 +141,7 @@ function init() {
                 );
                 console.log();
             } else {
-                const useYarn = isUsingYarn();
+                // const useYarn = isUsingYarn();
                 // createApp(
                 //     projectName,
                 //     program.verbose,
