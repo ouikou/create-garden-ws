@@ -229,8 +229,8 @@ function run(
             getPackageInfo(templateToInstall),
         ])
             .then(([packageInfo, templateInfo]) => {
-                console.log(`########################################packageInfo:  ${packageInfo}`);
-                console.log(`########################################packageInfo:  ${templateInfo}`);
+                console.log(`########################################packageInfo:  ${JSON.stringify(packageInfo)}`);
+                console.log(`########################################packageInfo:  ${JSON.stringify(templateInfo)}`);
             })
     });
 }
