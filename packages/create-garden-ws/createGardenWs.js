@@ -97,8 +97,6 @@ function init() {
                 }
             )
             .then(console.log);
-    } else {
-        console.log('########################################')
     }
 
     if (typeof projectName === 'undefined') {
@@ -117,9 +115,72 @@ function init() {
         );
         process.exit(1);
     }
+
+    // We first check the registry directly via the API, and if that fails, we try
+    // the slower `npm view [package] version` command.
+    //
+    // This is important for users in environments where direct access to npm is
+    // blocked by a firewall, and packages are provided exclusively via a private
+    // registry.
+    checkForLatestVersion()
+        .catch(() => {
+            try {
+                return execSync('npm view create-garden-ws version').toString().trim();
+            } catch (e) {
+                return null;
+            }
+        })
+        .then(latest => {
+            if (latest && semver.lt(packageJson.version, latest)) {
+                console.log();
+                console.error(
+                    chalk.yellow(
+                        `You are running \`create-garden-ws\` ${packageJson.version}, which is behind the latest release (${latest}).\n\n` +
+                        'We recommend always using the latest version of create-garden-ws if possible.'
+                    )
+                );
+                console.log();
+            } else {
+                const useYarn = isUsingYarn();
+                // createApp(
+                //     projectName,
+                //     program.verbose,
+                //     program.scriptsVersion,
+                //     program.template,
+                //     useYarn,
+                //     program.usePnp
+                // );
+                console.log('###################################  createApp()')
+            }
+        });
 }
+
+
 function getTemplateInstallPackage() {
     console.log('############  getTemplateInstallPackage()')
+}
+
+function checkForLatestVersion() {
+    return new Promise((resolve, reject) => {
+        https
+            .get(
+                'https://registry.npmjs.org/-/package/create-react-app/dist-tags',
+                res => {
+                    if (res.statusCode === 200) {
+                        let body = '';
+                        res.on('data', data => (body += data));
+                        res.on('end', () => {
+                            resolve(JSON.parse(body).latest);
+                        });
+                    } else {
+                        reject();
+                    }
+                }
+            )
+            .on('error', () => {
+                reject();
+            });
+    });
 }
 
 module.exports = {
