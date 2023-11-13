@@ -36,6 +36,8 @@
     "https": "^1.0.0",
     "path": "^0.12.7",
     "semver": "^7.5.4",
+    "tar-pack": "^3.4.1",
+    "tmp": "^0.2.1",
     "validate-npm-package-name": "^5.0.0"
   },
   "gitHead": "a43528928e47daf8cb3e16242ba18e1a89a843a8"
