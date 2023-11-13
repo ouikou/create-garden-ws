@@ -35,6 +35,8 @@ const commander = require('commander');
 const envinfo = require('envinfo');
 const execSync = require('child_process').execSync;
 const fs = require('fs-extra');
+const path = require('path');
+const semver = require('semver');
 
 
 const validateProjectName = require('validate-npm-package-name');
