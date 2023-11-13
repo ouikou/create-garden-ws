@@ -218,6 +218,10 @@ function run(
         getInstallPackage(version, originalDirectory),
         getTemplateInstallPackage(template, originalDirectory),
     ]).then(([packageToInstall, templateToInstall]) => {
+        const allDependencies = [packageToInstall];
+        console.log(`###################################packageToInstall: ${packageToInstall}`);
+        console.log(`###################################templateToInstall: ${templateToInstall}`);
+
         console.log('Installing packages. This might take a couple of minutes.');
     });
 }
