@@ -11,7 +11,8 @@
     "test": "__tests__"
   },
   "files": [
-    "bin"
+    "bin",
+    "scripts"
   ],
   "bin": {
     "garden-scripts": "./bin/garden-scripts.js"
@@ -19,5 +20,11 @@
   "scripts": {
     "test": "node ./__tests__/garden-scripts.test.js"
   },
-  "gitHead": "0c1302a74164b3cba4a19085c9233ace902a2e61"
+  "gitHead": "0c1302a74164b3cba4a19085c9233ace902a2e61",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "fs-extra": "^11.1.1",
+    "os": "^0.1.2",
+    "path": "^0.12.7"
+  }
 }

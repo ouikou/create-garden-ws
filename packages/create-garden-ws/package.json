@@ -6,7 +6,7 @@
   "homepage": "",
   "license": "MIT",
   "engines": {
-    "node": ">=18"
+    "node": ">=16"
   },
   "main": "bin/create-garden-ws.js",
   "directories": {

@@ -301,6 +301,22 @@ function run(
                     templateInfo,
                 }));
             })
+            .then(async ({ packageInfo, supportsTemplates, templateInfo }) => {
+                const packageName = packageInfo.name;
+                const templateName = supportsTemplates ? templateInfo.name : undefined;
+                checkNodeVersion(packageName);
+
+                await executeNodeScript(
+                    {
+                        cwd: process.cwd()
+                    },
+                    [root, appName, verbose, originalDirectory, templateName],
+                    `
+                  const init = require('${packageName}/scripts/init.js');
+                  init.apply(null, JSON.parse(process.argv[1]));
+                `
+                );
+            })
     });
 }
 
@@ -412,40 +428,38 @@ function extractStream(stream, dest) {
 }
 
 // Extract package name from tarball url or path.
-function getPackageInfo(installPackage) {
+async function getPackageInfo(installPackage) {
     if (installPackage.match(/^.+\.(tgz|tar\.gz)$/)) {
-        return getTemporaryDirectory()
-            .then(obj => {
-                let stream;
-                if (/^http/.test(installPackage)) {
-                    stream = hyperquest(installPackage);
-                } else {
-                    stream = fs.createReadStream(installPackage);
-                }
-                return extractStream(stream, obj.tmpdir).then(() => obj);
-            })
-            .then(obj => {
-                const { name, version } = require(path.join(
-                    obj.tmpdir,
-                    'package.json'
-                ));
-                obj.cleanup();
-                return { name, version };
-            })
-            .catch(err => {
-                console.log(
-                    `Could not extract the package name from the archive: ${err.message}`
-                );
-                const assumedProjectName = installPackage.match(
-                    /^.+\/(.+?)(?:-\d+.+)?\.(tgz|tar\.gz)$/
-                )[1];
-                console.log(
-                    `Based on the filename, assuming it is "${chalk.cyan(
-                        assumedProjectName
-                    )}"`
-                );
-                return Promise.resolve({ name: assumedProjectName });
-            });
+        try {
+            const obj = await getTemporaryDirectory();
+            let stream;
+            if (/^http/.test(installPackage)) {
+                stream = hyperquest(installPackage);
+            } else {
+                stream = fs.createReadStream(installPackage);
+            }
+            await extractStream(stream, obj.tmpdir);
+            const obj_1 = obj;
+            const { name, version } = require(path.join(
+                obj_1.tmpdir,
+                'package.json'
+            ));
+            obj_1.cleanup();
+            return { name, version };
+        } catch (err) {
+            console.log(
+                `Could not extract the package name from the archive: ${err.message}`
+            );
+            const assumedProjectName = installPackage.match(
+                /^.+\/(.+?)(?:-\d+.+)?\.(tgz|tar\.gz)$/
+            )[1];
+            console.log(
+                `Based on the filename, assuming it is "${chalk.cyan(
+                    assumedProjectName
+                )}"`
+            );
+            return await Promise.resolve({ name: assumedProjectName });
+        }
     } else if (installPackage.startsWith('git+')) {
         // Pull package name out of git urls e.g:
         // git+https://github.com/mycompany/garden-scripts.git
@@ -491,6 +505,37 @@ function checkForLatestVersion() {
                 reject();
             });
     });
+}
+
+function checkNodeVersion(packageName) {
+    const packageJsonPath = path.resolve(
+        process.cwd(),
+        'node_modules',
+        packageName,
+        'package.json'
+    );
+
+    if (!fs.existsSync(packageJsonPath)) {
+        return;
+    }
+
+    const packageJson = require(packageJsonPath);
+    if (!packageJson.engines || !packageJson.engines.node) {
+        return;
+    }
+
+    if (!semver.satisfies(process.version, packageJson.engines.node)) {
+        console.error(
+            chalk.red(
+                'You are running Node %s.\n' +
+                'Create React App requires Node %s or higher. \n' +
+                'Please update your version of Node.'
+            ),
+            process.version,
+            packageJson.engines.node
+        );
+        process.exit(1);
+    }
 }
 
 function checkAppName(appName) {
