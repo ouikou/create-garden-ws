@@ -11,8 +11,7 @@
     "test": "__tests__"
   },
   "files": [
-    "template",
-    "template.json"
+    "template"
   ],
   "scripts": {
     "test": "node ./__tests__/cgw-template.test.js"
