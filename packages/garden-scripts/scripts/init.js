@@ -149,20 +149,20 @@ module.exports = function (
         );
     }
 
-    console.log('');
-    console.log('Removing template files. This might take a couple of minutes.');
-    // On 'exit' we will delete these files from target directory.
-    const knownGeneratedFiles = ['package.json', 'package-lock.json', 'node_modules'];
-    const currentFiles = fs.readdirSync(path.join(appPath));
-    currentFiles.forEach(file => {
-        knownGeneratedFiles.forEach(fileToMatch => {
-            // This removes all knownGeneratedFiles.
-            if (file === fileToMatch) {
-                console.log(`Deleting generated file.... ${chalk.cyan(file)}`);
-                fs.removeSync(path.join(appPath, file));
-            }
-        });
-    });
+    // console.log('');
+    // console.log('Removing template files. This might take a couple of minutes.');
+    // // On 'exit' we will delete these files from target directory.
+    // const knownGeneratedFiles = ['package.json', 'package-lock.json', 'node_modules'];
+    // const currentFiles = fs.readdirSync(path.join(appPath));
+    // currentFiles.forEach(file => {
+    //     knownGeneratedFiles.forEach(fileToMatch => {
+    //         // This removes all knownGeneratedFiles.
+    //         if (file === fileToMatch) {
+    //             console.log(`Deleting generated file.... ${chalk.cyan(file)}`);
+    //             fs.removeSync(path.join(appPath, file));
+    //         }
+    //     });
+    // });
 
     console.log();
     console.log(`Success! Created ${chalk.bgBlue(appName)} at ${chalk.green(appPath)}`);
