@@ -159,7 +159,7 @@ module.exports = function (
             // This removes all knownGeneratedFiles.
             if (file === fileToMatch) {
                 console.log(`Deleting generated file... ${chalk.cyan(file)}`);
-                fs.removeSync(path.join(root, file));
+                fs.removeSync(path.join(appPath, file));
             }
         });
     });
