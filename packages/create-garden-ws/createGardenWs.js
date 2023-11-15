@@ -47,13 +47,11 @@ const packageJson = require('./package.json');
 let projectName;
 
 function init() {
-    console.log(`##################################### ${packageJson.name}`)
     const program = new commander.Command(packageJson.name)
         .version(packageJson.version)
         .arguments('<project-directory>')
         .usage(`${chalk.green('<project-directory>')} [options]`)
         .action(name => {
-            console.log(`################################################# ${name}`)
             projectName = name;
         })
         .option('--verbose', 'print additional logs')
@@ -112,6 +110,9 @@ function init() {
             .then(console.log);
     }
 
+    console.log(`################################################`)
+    console.log(`${JSON.stringify(program)}`)
+    console.log(`################################################`)
     console.log(`##################################### ${projectName}`)
     console.log(`##################################### ${program.initWs}`)
     if (program.initWs) {
