@@ -4,8 +4,9 @@
     "packages/*"
   ],
   "scripts": {
-    "verup": "git commit -a -m \"first commit\" && lerna version --force-publish",
-    "publish": "lerna publish from-package",
+    "cvp": "npm run verup && npm run publish",
+    "verup": "git commit -a -m \"first commit\" && lerna version patch --yes --force-publish",
+    "publish": "lerna publish from-package --yes",
     "build": "cd packages/react-scripts && node bin/react-scripts.js build",
     "create-garden-ws": "node tasks/cgw.js",
     "test": "cd packages/react-scripts && node bin/react-scripts.js test"
