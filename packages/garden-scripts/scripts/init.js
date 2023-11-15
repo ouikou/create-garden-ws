@@ -151,5 +151,21 @@ module.exports = function (
         );
     }
 
+    // On 'exit' we will delete these files from target directory.
+    const knownGeneratedFiles = ['package.json', 'package-lock.json', 'node_modules'];
+    const currentFiles = fs.readdirSync(path.join(appPath));
+    currentFiles.forEach(file => {
+        knownGeneratedFiles.forEach(fileToMatch => {
+            // This removes all knownGeneratedFiles.
+            if (file === fileToMatch) {
+                console.log(`Deleting generated file... ${chalk.cyan(file)}`);
+                fs.removeSync(path.join(root, file));
+            }
+        });
+    });
 
+    console.log();
+    console.log(`Success! Created ${appName} at ${appPath}`);
+    console.log();
+    console.log('Happy hacking!');
 };
