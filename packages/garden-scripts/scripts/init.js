@@ -113,26 +113,16 @@ module.exports = function (
         require.resolve(`${templateName}/package.json`, { paths: [appPath] })
     );
 
-    const templateJsonPath = path.join(templatePath, 'template.json');
-
-    let templateJson = {};
-    if (fs.existsSync(templateJsonPath)) {
-        templateJson = require(templateJsonPath);
-    }
-
-    const templatePackage = templateJson.package || {};
-
-    console.log(`#################################   ${templateJsonPath}`)
-
-    // This was deprecated in CRA v5.
-    if (templateJson.dependencies || templateJson.scripts) {
-        console.log();
-        console.log(
-            chalk.red(
-                'Root-level `dependencies` and `scripts` keys in `template.json` were deprecated for Create GARDEN Workspace 1.\n' +
-                'This template needs to be updated to use the new `package` key.'
-            )
+    // Copy the files for the user
+    const templateDir = path.join(templatePath, 'template');
+    if (fs.existsSync(templateDir)) {
+        fs.copySync(templateDir, appPath);
+    } else {
+        console.error(
+            `Could not locate supplied template: ${chalk.green(templateDir)}`
         );
-        console.log('For more information, visit https://cra.link/templates');
+        return;
     }
+
+
 };
