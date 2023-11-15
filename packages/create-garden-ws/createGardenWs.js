@@ -53,6 +53,7 @@ function init() {
         .arguments('<project-directory>')
         .usage(`${chalk.green('<project-directory>')} [options]`)
         .action(name => {
+            console.log(`################################################# ${name}`)
             projectName = name;
         })
         .option('--verbose', 'print additional logs')
