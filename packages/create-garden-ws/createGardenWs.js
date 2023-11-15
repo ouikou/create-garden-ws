@@ -40,8 +40,6 @@ const semver = require('semver');
 const spawn = require('cross-spawn');
 const tmp = require('tmp');
 const unpack = require('tar-pack').unpack;
-
-
 const validateProjectName = require('validate-npm-package-name');
 
 const packageJson = require('./package.json');
@@ -49,6 +47,7 @@ const packageJson = require('./package.json');
 let projectName;
 
 function init() {
+    console.log(`##################################### ${packageJson.name}`)
     const program = new commander.Command(packageJson.name)
         .version(packageJson.version)
         .arguments('<project-directory>')
