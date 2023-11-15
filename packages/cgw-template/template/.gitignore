@@ -1,0 +1,8 @@
+#ディレクトリ build,install,log 配下の全てのファイルを除外
+build/
+install/
+log/
+
+#Pythonのキャッシュファイルは除外
+__pycache__/
+

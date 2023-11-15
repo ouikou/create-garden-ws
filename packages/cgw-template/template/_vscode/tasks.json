@@ -1,0 +1,81 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		// ###############################
+		// Tasks for GARDEN workspace 
+		// ###############################
+		// Build
+		{
+			"label": "[GARDEN] build workspace",
+			"detail": "Build GARDEN workspace (default)",
+			"type": "shell",
+			"command":"./make.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+                "focus": true
+            },
+			"problemMatcher": "$gcc"
+		},
+		// Rebuild
+		{
+			"label": "[GARDEN] rebuild workspace",
+			"detail": "Clean & Build GARDEN workspace",
+			"type": "shell",
+			"command": "colcon build --cmake-clean-cache --symlink-install --parallel-workers 1",
+			"group": {
+				"kind": "build"
+			},
+			"presentation": {
+                "focus": true
+            },
+			"problemMatcher": "$gcc",
+			"dependsOn": [
+				"[GARDEN] clean workspace"
+			]
+		},
+		// Clean
+		{
+			"label": "[GARDEN] clean workspace",
+			"detail": "Clean GARDEN workspace by deleting all generated files.",
+			"type": "shell",
+			"command": "rm -fr build install log",
+			"presentation": {
+                "focus": true
+            },
+			"problemMatcher": []
+		},
+		// ###############################
+		// Tasks for Rulebase
+		// ###############################
+		// Generation
+		{
+			"label": "[GARDEN] generation rulebase",
+			"detail": "Generation Rulebase source.",
+			"type": "shell",
+			"command": ".generator/gen.sh",
+			"options": {
+				"cwd": "./src/rulebase"
+			},
+			"presentation": {
+                "focus": true
+            },
+			"problemMatcher": []
+		},
+		{
+			"label": "[GARDEN] build rulebase",
+			"detail": "Build Rule workspace",
+			"type": "shell",
+			"command": "./make.sh",
+			"options": {
+				"cwd": "./src/rulebase"
+			},
+			"presentation": {
+                "focus": true
+            },
+			"problemMatcher": "$gcc"
+		}
+	]
+}

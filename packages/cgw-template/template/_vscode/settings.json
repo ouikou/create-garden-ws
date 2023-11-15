@@ -1,0 +1,19 @@
+{
+    "python.formatting.autopep8Args": [
+        "--max-line-length=200"
+    ],
+    "cmake.configureOnOpen": false,
+    "garden.dt.convert": true,
+    "cmake.sourceDirectory": "/home/ouikou/zipccom/garden_ws/src/control/vehicle_command_selector",
+    "openInExternalApp.openMapper": [
+        {
+            "extensionName": "csv",
+            "apps": [
+              {
+                "title": "LibreOffice Calc",
+                "shellCommand": "libreoffice --calc --infilter=\"Text - txt - csv (StarCalc):44,34,0,0,,0,true,false\" \"${file}\""
+              }
+            ]
+          }
+    ]
+}
