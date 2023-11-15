@@ -82,7 +82,9 @@ function init() {
         })
         .parse(process.argv);
 
-    if (program.info) {
+    const options = program.opts();
+
+    if (options.info) {
         console.log(chalk.bold('\nEnvironment Info:'));
         console.log(
             `\n  current version of ${packageJson.name}: ${packageJson.version}`
@@ -114,8 +116,8 @@ function init() {
     console.log(`${JSON.stringify(program)}`)
     console.log(`################################################`)
     console.log(`##################################### ${projectName}`)
-    console.log(`##################################### ${program.initWs}`)
-    if (program.initWs) {
+    console.log(`##################################### ${options.initWs}`)
+    if (options.initWs) {
         projectName = '.';
     }
     console.log(`##################################### ${projectName}`)
@@ -123,16 +125,16 @@ function init() {
     if (typeof projectName === 'undefined') {
         console.error('Please specify the project directory:');
         console.log(
-            `  ${chalk.cyan(program.name())} ${chalk.green('<project-directory>')}`
+            `  ${chalk.cyan(options.name())} ${chalk.green('<project-directory>')}`
         );
         console.log();
         console.log('For example:');
         console.log(
-            `  ${chalk.cyan(program.name())} ${chalk.green('my-garden-ws')}`
+            `  ${chalk.cyan(options.name())} ${chalk.green('my-garden-ws')}`
         );
         console.log();
         console.log(
-            `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`
+            `Run ${chalk.cyan(`${options.name()} --help`)} to see all options.`
         );
         process.exit(1);
     }
@@ -164,10 +166,10 @@ function init() {
             } else {
                 createApp(
                     projectName,
-                    program.initWs,
-                    program.verbose,
-                    program.scriptsVersion,
-                    program.template
+                    options.initWs,
+                    options.verbose,
+                    options.scriptsVersion,
+                    options.template
                 );
             }
         });
