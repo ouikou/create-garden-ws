@@ -62,6 +62,7 @@ function init() {
             '--template <path-to-template>',
             'specify a template for the created workspace'
         )
+        .option('--init-ws', 'set up a existing workspace.')
         .allowUnknownOption()
         .on('--help', () => {
             console.log(
@@ -111,6 +112,10 @@ function init() {
             .then(console.log);
     }
 
+    if (program.initWs) {
+        projectName = '.';
+    }
+
     if (typeof projectName === 'undefined') {
         console.error('Please specify the project directory:');
         console.log(
@@ -155,6 +160,7 @@ function init() {
             } else {
                 createApp(
                     projectName,
+                    program.initWs,
                     program.verbose,
                     program.scriptsVersion,
                     program.template
@@ -163,7 +169,7 @@ function init() {
         });
 }
 
-function createApp(name, verbose, version, template) {
+function createApp(name, initWs, verbose, version, template) {
     const unsupportedNodeVersion = !semver.satisfies(
         // Coerce strings with metadata (i.e. `15.0.0-nightly`).
         semver.coerce(process.version),
@@ -183,7 +189,9 @@ function createApp(name, verbose, version, template) {
     const appName = path.basename(root);
 
     checkAppName(appName);
-    fs.ensureDirSync(name);
+    if (!initWs) {
+        fs.ensureDirSync(name);
+    }
     if (!isSafeToCreateProjectIn(root, name)) {
         process.exit(1);
     }
