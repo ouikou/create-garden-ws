@@ -112,16 +112,6 @@ function init() {
             .then(console.log);
     }
 
-    console.log(`################################################`)
-    console.log(`${JSON.stringify(program)}`)
-    console.log(`################################################`)
-    console.log(`##################################### ${projectName}`)
-    console.log(`##################################### ${options.initWs}`)
-    if (options.initWs) {
-        projectName = '.';
-    }
-    console.log(`##################################### ${projectName}`)
-
     if (typeof projectName === 'undefined') {
         console.error('Please specify the project directory:');
         console.log(
