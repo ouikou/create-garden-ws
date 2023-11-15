@@ -165,7 +165,5 @@ module.exports = function (
     });
 
     console.log();
-    console.log(`Success! Created ${appName} at ${appPath}`);
-    console.log();
-    console.log('Happy hacking!');
+    console.log(`Success! Created ${chalk.bgBlue(appName)} at ${chalk.green(appPath)}`);
 };
