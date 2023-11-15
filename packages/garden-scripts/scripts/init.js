@@ -124,8 +124,8 @@ module.exports = function (
         return;
     }
 
-    const readmeExists = fs.existsSync(path.join(appPath, 'README.md'));
-    if (readmeExists) {
+    const vsCodeExists = fs.existsSync(path.join(appPath, '_vscode'));
+    if (vsCodeExists) {
         // Rename if there's already a `_vscode` folder there
         fs.renameSync(
             path.join(appPath, '_vscode'),
