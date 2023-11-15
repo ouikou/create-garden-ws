@@ -566,7 +566,7 @@ function checkNodeVersion(packageName) {
         console.error(
             chalk.red(
                 'You are running Node %s.\n' +
-                'Create React App requires Node %s or higher. \n' +
+                'Create GARDEN Workspace requires Node %s or higher. \n' +
                 'Please update your version of Node.'
             ),
             process.version,

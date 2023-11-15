@@ -7,9 +7,9 @@
     "cvp": "npm run verup && npm run publish",
     "verup": "git commit -a -m \"first commit\" && lerna version patch --yes --force-publish && git push origin main",
     "publish": "lerna publish from-package --yes",
-    "build": "cd packages/react-scripts && node bin/react-scripts.js build",
+    "build": "cd packages/garden-scripts && node bin/garden-scripts.js build",
     "create-garden-ws": "node tasks/cgw.js",
-    "test": "cd packages/react-scripts && node bin/react-scripts.js test"
+    "test": "cd packages/garden-scripts && node bin/garden-scripts.js test"
   },
   "devDependencies": {
     "jest": "^29.7.0",

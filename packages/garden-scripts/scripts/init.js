@@ -17,66 +17,6 @@ process.on('unhandledRejection', err => {
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
-const execSync = require('child_process').execSync;
-const os = require('os');
-
-function isInGitRepository() {
-    try {
-        execSync('git rev-parse --is-inside-work-tree', { stdio: 'ignore' });
-        return true;
-    } catch (e) {
-        return false;
-    }
-}
-
-function isInMercurialRepository() {
-    try {
-        execSync('hg --cwd . root', { stdio: 'ignore' });
-        return true;
-    } catch (e) {
-        return false;
-    }
-}
-
-function tryGitInit() {
-    try {
-        execSync('git --version', { stdio: 'ignore' });
-        if (isInGitRepository() || isInMercurialRepository()) {
-            return false;
-        }
-
-        execSync('git init', { stdio: 'ignore' });
-        return true;
-    } catch (e) {
-        console.warn('Git repo not initialized', e);
-        return false;
-    }
-}
-
-function tryGitCommit(appPath) {
-    try {
-        execSync('git add -A', { stdio: 'ignore' });
-        execSync('git commit -m "Initialize project using Create GARDEN Workspace"', {
-            stdio: 'ignore',
-        });
-        return true;
-    } catch (e) {
-        // We couldn't commit in already initialized git repo,
-        // maybe the commit author config is not set.
-        // In the future, we might supply our own committer
-        // like Ember CLI does, but for now, let's just
-        // remove the Git files to avoid a half-done state.
-        console.warn('Git commit not created', e);
-        console.warn('Removing .git directory...');
-        try {
-            // unlinkSync() doesn't work on directories.
-            fs.removeSync(path.join(appPath, '.git'));
-        } catch (removeErr) {
-            // Ignore.
-        }
-        return false;
-    }
-}
 
 module.exports = function (
     appPath,
@@ -85,8 +25,6 @@ module.exports = function (
     originalDirectory,
     templateName
 ) {
-    const appPackage = require(path.join(appPath, 'package.json'));
-
     if (!templateName) {
         console.log('');
         console.error(
