@@ -124,6 +124,15 @@ module.exports = function (
         return;
     }
 
+    const readmeExists = fs.existsSync(path.join(appPath, 'README.md'));
+    if (readmeExists) {
+        // Rename if there's already a `_vscode` folder there
+        fs.renameSync(
+            path.join(appPath, '_vscode'),
+            path.join(appPath, '.vscode')
+        );
+    }
+
     const gitignoreExists = fs.existsSync(path.join(appPath, '.gitignore'));
     if (gitignoreExists) {
         // Append if there's already a `.gitignore` file there
