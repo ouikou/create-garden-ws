@@ -125,9 +125,7 @@ module.exports = function (
     }
 
     const vsCodeExists = fs.existsSync(path.join(appPath, '_vscode'));
-    console.log(`############################################ ${vsCodeExists}`)
     if (vsCodeExists) {
-        console.log(`############################################ ${"bbbbbbbbbbbbb"}`)
         // Rename if there's already a `_vscode` folder there
         fs.renameSync(
             path.join(appPath, '_vscode'),
@@ -151,6 +149,8 @@ module.exports = function (
         );
     }
 
+    console.log('');
+    console.log('Removing template files. This might take a couple of minutes.');
     // On 'exit' we will delete these files from target directory.
     const knownGeneratedFiles = ['package.json', 'package-lock.json', 'node_modules'];
     const currentFiles = fs.readdirSync(path.join(appPath));
