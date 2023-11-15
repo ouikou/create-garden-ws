@@ -127,7 +127,7 @@ module.exports = function (
     const vsCodeExists = fs.existsSync(path.join(appPath, '_vscode'));
     console.log(`############################################ ${vsCodeExists}`)
     if (vsCodeExists) {
-        console.log(`############################################ ${"aaaaaaaaaaaaaaaaaaaa"}`)
+        console.log(`############################################ ${"bbbbbbbbbbbbb"}`)
         // Rename if there's already a `_vscode` folder there
         fs.renameSync(
             path.join(appPath, '_vscode'),
