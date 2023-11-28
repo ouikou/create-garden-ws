@@ -87,6 +87,17 @@ module.exports = function (
         );
     }
 
+    const genShExists = fs.existsSync(path.join(appPath, 'src', 'rulebase', '.generator', 'gen.sh'));
+    if (genShExists) {
+        // change the permissions of `src/rulebase/.generator/gen.sh`
+        fs.chmodSync(path.join(appPath, 'src', 'rulebase', '.generator', 'gen.sh'), '777');
+    }
+    const makeShExists = fs.existsSync(path.join(appPath, 'src', 'rulebase', 'make.sh'));
+    if (makeShExists) {
+        // change the permissions of `src/rulebase/make.sh`
+        fs.chmodSync(path.join(appPath, 'src', 'rulebase', 'make.sh'), '777');
+    }
+
     console.log('');
     console.log('Removing template files. This might take a couple of minutes.');
     // On 'exit' we will delete these files from target directory.
