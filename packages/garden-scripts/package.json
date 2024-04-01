@@ -20,7 +20,7 @@
   "scripts": {
     "test": "node ./__tests__/garden-scripts.test.js"
   },
-  "gitHead": "0c1302a74164b3cba4a19085c9233ace902a2e61",
+  "gitHead": "4532f64f0d96376d4d81c43b83b07fb550541339",
   "dependencies": {
     "chalk": "^4.1.2",
     "child_process": "^1.0.2",
