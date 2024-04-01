@@ -87,6 +87,7 @@ module.exports = function (
         );
     }
 
+
     const genShExists = fs.existsSync(path.join(appPath, 'src', 'rulebase', '.generator', 'gen.sh'));
     if (genShExists) {
         // change the permissions of `src/rulebase/.generator/gen.sh`
