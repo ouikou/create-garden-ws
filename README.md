@@ -30,7 +30,7 @@ To create a new workspace, you may choose one of the following methods:
 
 ### Create a new folder 
 
-#### npx
+#### npx 
 
 ```sh
 npx create-garden-ws my-ws
