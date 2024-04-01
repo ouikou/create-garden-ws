@@ -92,8 +92,13 @@ module.exports = function (
         // change the permissions of `src/rulebase/.generator/gen.sh`
         fs.chmodSync(path.join(appPath, 'src', 'rulebase', '.generator', 'gen.sh'), '777');
     }
-    const makeShExists = fs.existsSync(path.join(appPath, 'src', 'rulebase', 'make.sh'));
-    if (makeShExists) {
+    const mainMakeShExists = fs.existsSync(path.join(appPath, 'make.sh'));
+    if (mainMakeShExists) {
+        // change the permissions of `make.sh`
+        fs.chmodSync(path.join(appPath, 'make.sh'), '777');
+    }
+    const subMakeShExists = fs.existsSync(path.join(appPath, 'src', 'rulebase', 'make.sh'));
+    if (subMakeShExists) {
         // change the permissions of `src/rulebase/make.sh`
         fs.chmodSync(path.join(appPath, 'src', 'rulebase', 'make.sh'), '777');
     }
